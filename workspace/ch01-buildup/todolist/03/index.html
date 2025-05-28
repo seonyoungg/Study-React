@@ -10,7 +10,7 @@
     <div id="todo">
       <header>
         <h1>Todo List - 03</h1>
-        <h3>실습 05-27</h3>
+        <h3>실습 05-28</h3>
         <p>파일 경로: <span id="filepath"></span></p>
       </header>
       <div id="main">
@@ -154,20 +154,34 @@
         }
       };
 
+      // 완료/미완료 처리
       function toggleDone(num) {
         console.log(num, '완료/미완료');
 
-        // let selectedItem;
-        // itemList.forEach((item) => {
-        //   if (item.num === num) {
-        //     selectedItem = item;
-        //   }
-        // });
+        // 데이터 갱신, itemList에서 num에 해당하는 item의 done 값을 수정
+        // itemList에서 num 값으로 item 조회
+        // item의 done 값을 수정
 
         const selectedItem = itemList.find((item) => item.num === num);
         console.log(selectedItem);
-
         selectedItem.done = !selectedItem.done;
+
+        //HTMLElement.childNodes  : 자식 노드들이 저장된 유사배열객체(Textnode)
+        //HTMLElement.childeren : 자식  노드들이 저장된 유사 배열 객체(요소노드만 사용)
+        const targetLi = document.querySelector(
+          `.todolist>li[data-name="${num}""]`
+        );
+        const titleSpan = targetLi.children[1];
+
+        // 화면 갱신, done 값에 따라서 <s> 추가 또는 삭제
+        if (selectedItem.done) {
+          const sElem = document.querySelector('s');
+          sElem.appendChild(titleSpan.firstChild);
+          titleSpan.appendChild(sElem);
+        } else {
+          titleSpan.appendChild(titleSpan.firstChild.lastChild);
+          titleSpan.firstChild.remove();
+        }
       }
 
       function deleteItem(num) {
