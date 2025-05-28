@@ -1,0 +1,7 @@
+{
+  "editor.codeActionWidget.includeNearbyQuickFixes": false,
+  "files.readonlyInclude": {
+    "**/sample/**": true,
+    "**/workspace-ins/**": true
+  }
+}
