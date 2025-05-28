@@ -9,7 +9,7 @@
   <body>
     <div id="todo">
       <header>
-        <h1>Todo List - 03</h1>
+        <h1>Todo List - 04</h1>
         <h3>실습 05-28</h3>
         <p>파일 경로: <span id="filepath"></span></p>
       </header>
@@ -200,6 +200,24 @@
 
       function deleteItem(num) {
         console.log('할일 삭제');
+        console.log(num);
+        // 데이터 갱신, itemList에서 num에 해당하는 item 삭제
+        const index = itemList.findIndex((item) => item.num === num);
+        itemList.splice(index, 1);
+
+        // 화면 갱신, 화면에서 num에 해당하는 item 제거
+        document.querySelector(`.todolist > li[data-num="${num}"]`).remove();
+
+        // const itemListAll = document.querySelectorAll('.todolist > li');
+        // itemListAll.forEach((item) => {
+        //   const itemNum = item.dataset.num;
+        //   // console.log(typeof num); // number
+        //   // console.log(typeof itemNum); // string
+
+        //   if (num === Number(itemNum)) {
+        //     item.remove();
+        //   }
+        // });
       }
     </script>
   </body>
