@@ -38,7 +38,9 @@
         // 카운터 감소
         const handleDown = () => {
           // 데이터 갱신, count 값 감소
-          setCount(count - 1);
+          if(count > 0){
+          setCount(count - 1)}
+          else alert('0보다 더이상 감소되지 않습니다.');
         };
 
         // 카운터 증가
