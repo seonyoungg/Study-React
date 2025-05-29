@@ -17,6 +17,8 @@ const reaction = {
     for(let child of children){
       if(typeof child === 'string' || typeof child === 'number'){
         child = document.createTextNode(child);
+      }else if(typeof child === 'function'){
+        child = child();
       }
       elem.appendChild(child);
     }
