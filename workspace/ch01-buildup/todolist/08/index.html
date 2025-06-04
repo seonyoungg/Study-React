@@ -48,7 +48,6 @@
         if(inputElem.value.trim() !== ''){
           props.addItem(inputElem.value.trim());
           inputElem.value = '';
-          inputElem.focus();
         }
       };
 
@@ -109,6 +108,9 @@
         console.log('할일 추가');
         const item = { num: itemList[itemList.length - 1]?.num + 1 || 1, title, done: false };
         setItemList([ ...itemList, item ]);
+        
+        const inputElem = document.querySelector('.todoinput > input');
+        inputElem.focus();
       }
 
       // 완료/미완료 처리

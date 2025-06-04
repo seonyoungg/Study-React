@@ -1,24 +1,34 @@
 const reaction = {
-  createElement: (tag, props, ...children) => {
+  createElement : (tag, props,  ...children)=>{
+
     // 요소 노드 생성
     const elem = document.createElement(tag);
+
     // 속성 추가
-    if (props) {
-      for (const attrName in props) {
-        // 객체의 모든 속성 반복
-        const value = props[attrName];
-        elem.setAttribute(attrName, value);
+    // props 를 객체로 들고 옴
+    if(props){
+      for(const attr in props){
+        const  value = props[attr];
+        elem.setAttribute(attr,value);
       }
     }
+
     // 자식 노드 추가
-    for (let child of children) {
-      if (typeof child === 'string' || typeof child === 'number') {
+    for(let child of children){
+      if(typeof child === 'string' || typeof child === 'number'){
         child = document.createTextNode(child);
       }
       elem.appendChild(child);
     }
-    // 요소 노드 반환
+
+    // const div = reaction.createElement("div", { id: "myDiv", class: "box" });
+    // for(const attrName in props) // 'id', 'class'
+    // elem.setAttribute("id", "myDiv");    
+    // elem.setAttribute("class", "box"); 
+
     return elem;
-  },
+  }
+
 };
+
 export default reaction;

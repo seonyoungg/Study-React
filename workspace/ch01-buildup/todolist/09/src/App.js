@@ -3,7 +3,6 @@ import Header from "./components/Header.js";
 import Todo from "./pages/Todo.js";
 import Reaction from "./reaction.js";
 
-
 function App(){
   // 샘플 목록
   const initItemList = [
@@ -19,6 +18,10 @@ function App(){
     console.log('할일 추가');
     const item = { num: itemList[itemList.length - 1]?.num + 1 || 1, title, done: false };
     setItemList([ ...itemList, item ]);
+    
+    // const inputElem = document.querySelector('.todoinput > input');
+    // inputElem.focus();
+    console.log('1');
   }
 
   // 완료/미완료 처리
@@ -44,6 +47,5 @@ function App(){
     )
   );
 }
-
 
 export default App;
