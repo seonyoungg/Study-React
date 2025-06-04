@@ -1,5 +1,11 @@
+export interface TodoItem {
+  num:number;
+  title:string;
+  done:boolean;
+}
+
 interface TodoItemProps {
-  item : object;
+  item : TodoItem;
   toggleDone : (num:number)=> void;
   deleteItem : (num:number)=> void;
 }
