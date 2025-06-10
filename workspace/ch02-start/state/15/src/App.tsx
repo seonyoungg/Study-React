@@ -17,9 +17,9 @@ const emailExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const cellphoneExp = /^(01[01]{1})[0-9]{3,4}[0-9]{4}$/;
 
 function App() {
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [cellphone, setCellphone] = useState('01012345678');
+  // const [ name, setName ] = useState('');
+  // const [ email, setEmail ] = useState('');
+  // const [ cellphone, setCellphone ] = useState('010');
   // const user = { name, email, cellphone };
 
   const [user, setUser] = useState({
@@ -33,9 +33,8 @@ function App() {
   // };
   // const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setEmail(event.target.value);
-  //   // setIsEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(event.target.value));
   // };
-  // const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  // const handleCellphoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setCellphone(event.target.value);
   // };
 
@@ -51,7 +50,7 @@ function App() {
 
   const onSubmitHandler = (event: React.FormEvent) => {
     //브라우저 기본 동작 취소(submit 동작 취소)
-    event?.preventDefault();
+    event.preventDefault();
 
     let newErrors = null;
 
