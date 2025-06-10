@@ -52,39 +52,31 @@ function App() {
     //브라우저 기본 동작 취소(submit 동작 취소)
     event.preventDefault();
 
-    let newErrors = null;
+    const newErrors: FormErrors = {};
 
     // 필수 입력 체크
     if (user.name.trim() === '') {
-      newErrors = {
-        name: { message: '이름을 입력하세요.' },
-      };
+      newErrors.name = { message: '이름을 입력하세요.' };
     } else if (user.name.trim().length < 2) {
-      newErrors = {
-        name: { message: '2글자 이상 입력하세요.' },
-      };
-    } else if (user.email.trim() === '') {
-      newErrors = {
-        email: { message: '이메일을 입력하세요.' },
-      };
+      newErrors.name = { message: '2글자 이상 입력하세요.' };
+    }
+
+    if (user.email.trim() === '') {
+      newErrors.email = { message: '이메일을 입력하세요.' };
     } else if (emailExp.test(user.email) === false) {
-      newErrors = {
-        email: { message: '이메일 양식에 맞지 않습니다.' },
-      };
-    } else if (user.cellphone.trim() === '') {
-      newErrors = {
-        cellphone: { message: '휴대폰 번호를 입력하세요.' },
-      };
+      newErrors.email = { message: '이메일 양식에 맞지 않습니다.' };
+    }
+
+    if (user.cellphone.trim() === '') {
+      newErrors.cellphone = { message: '휴대폰 번호를 입력하세요.' };
     } else if (cellphoneExp.test(user.cellphone) === false) {
-      newErrors = {
-        cellphone: { message: '휴대폰 형식에 맞지 않습니다.' },
-      };
+      newErrors.cellphone = { message: '휴대폰 형식에 맞지 않습니다.' };
     }
 
     if (newErrors) {
       // 입력값 검증 실패
       setErrors(newErrors);
-      console.error(errors);
+      // console.error(errors);
     } else {
       // 입력값 검증 통과
       setErrors({});
