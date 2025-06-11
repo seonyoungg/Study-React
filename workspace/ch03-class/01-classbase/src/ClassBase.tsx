@@ -33,7 +33,7 @@ class ClickMe extends Component<ClickMeProps, clickMeState> {
   }
 
   increase = () => {
-    this.setState({ count: this.state.count + this.props.level || 0 });
+    this.setState({ count: this.state.count + (this.props.level ?? 1) });
   };
 
   render() {

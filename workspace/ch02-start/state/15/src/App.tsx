@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 interface FormErrors {
   name?: { message: string };
   email?: { message: string };
@@ -73,16 +73,17 @@ function App() {
       newErrors.cellphone = { message: '휴대폰 형식에 맞지 않습니다.' };
     }
 
-    if (newErrors) {
+    if (Object.keys(newErrors).length > 0) {
       // 입력값 검증 실패
       setErrors(newErrors);
-      // console.error(errors);
+      console.error(newErrors);
     } else {
       // 입력값 검증 통과
       setErrors({});
       console.log('서버에 전송...', user);
     }
   };
+
   return (
     <>
       <h1>15 회원가입 입력값 상태 관리</h1>
