@@ -13,15 +13,22 @@ function App() {
       <h1>01 useState - 상태 관리</h1>
       <div>
         {/* <input type='text' value={message} onChange={handleChange} /> */}
-        <input
+        {/* <input
           type='text'
           value={text}
           onChange={(e) => {
             setText(e.target.value);
           }}
+        /> */}
+        <input
+          type='text'
+          value={text}
+          placeholder='메세지를 입력하세요.'
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
         />
-        <br />
-        <span>입력 메세지: {text}</span>
+        <p>입력 메세지: {text}</p>
       </div>
     </>
   );
