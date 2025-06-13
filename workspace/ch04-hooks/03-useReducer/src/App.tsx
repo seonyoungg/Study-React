@@ -1,14 +1,14 @@
-// import Counter from '@components/Counter';
-// import Header from '@components/Header';
+import Counter from '@components/Counter';
+import Header from '@components/Header';
 // import Attendance from './Attendance';
-import Bank from './Bank';
+// import Bank from './Bank';
 
 function App() {
   return (
     <>
-      {/* <Header />
-      <Counter>100</Counter> */}
-      <Bank />
+      <Header />
+      <Counter>100</Counter>
+      {/* <Bank /> */}
       {/* <Attendance /> */}
     </>
   );
