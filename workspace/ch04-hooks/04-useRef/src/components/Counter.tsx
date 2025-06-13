@@ -1,5 +1,5 @@
 import Button from '@components/Button';
-import { useReducer, useRef, useState } from 'react';
+import { useReducer, useRef } from 'react';
 
 interface CounterProps {
   children: string;
