@@ -31,9 +31,8 @@ const TodoContainer = () => {
     setItemList(newItemList);
   }
   return (
-    <div>  <Todo itemList={ itemList } addItem={addItem} toggleDone={toggleDone} deleteItem={deleteItem}/>
-
-     
+    <div>  
+      <Todo itemList={ itemList } addItem={addItem} toggleDone={toggleDone} deleteItem={deleteItem}/>
     </div>
   )
 }
