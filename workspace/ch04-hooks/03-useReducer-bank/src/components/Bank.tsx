@@ -1,3 +1,4 @@
+import bankReducer from '../bankReducer';
 import { useReducer, useState } from 'react';
 
 /** Reducer : Component 의 State를 업데이트 해줌
@@ -26,38 +27,17 @@ type ReducerAction = {
 };
 */
 
-type ReducerAction = {
-  type: 'deposit' | 'withdraw';
-  value: number;
-};
-
-const reducer = (state: number, action: ReducerAction) => {
-  console.log('reducer 화이팅', action.type, action.value);
-
-  switch (action.type) {
-    case 'deposit':
-      return state + action.value;
-    case 'withdraw':
-      return state - action.value;
-    default:
-      return state;
-  }
-};
-
 const Bank = () => {
   const [number, setNumber] = useState(0);
 
-  const [money, dispatch] = useReducer(reducer, 0);
+  const [money, dispatch] = useReducer(bankReducer, 0);
   //  const [배열, 함수] = useReducer(reducer, 초기값)
 
   return (
     <div>
       <h2>useReducer 은행에 오신것을 환영합니다.</h2>
       <p>잔고 : {money}원</p>
-      <input type='number'
-             value={number}
-             onChange={(e) => setNumber(parseInt(e.target.value))}
-             step='5000' />
+      <input type='number' value={number} onChange={(e) => setNumber(parseInt(e.target.value))} step='5000' />
       <button
         onClick={() => {
           dispatch({ type: 'deposit', value: number });

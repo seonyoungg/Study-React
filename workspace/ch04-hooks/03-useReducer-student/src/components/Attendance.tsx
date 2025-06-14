@@ -1,16 +1,10 @@
 import { useReducer, useState } from 'react';
 import Student, { type StudentProps } from './Student';
+import reducerAttendance from '../reducerAttendance';
 
-interface StateProps {
+export interface StateProps {
   count: number;
   student: StudentProps[];
-}
-
-interface StudentAction {
-  type: 'add';
-  payload: {
-    name: string;
-  };
 }
 
 const initState: StateProps = {
@@ -24,28 +18,9 @@ const initState: StateProps = {
   ],
 };
 
-const reducer = (state: StateProps, action: StudentAction) => {
-  switch (action.type) {
-    case 'add': {
-      const newStudent: StudentProps = {
-        id: Date.now(),
-        name: action.payload.name,
-        isHere: false,
-      };
-      return {
-        count: state.count + 1,
-        student: [...state.student, newStudent],
-      };
-    }
-    default:
-      return state;
-  }
-};
-
 function Attendance() {
   const [name, setName] = useState('');
-
-  const [studentInfo, dispatch] = useReducer(reducer, initState);
+  const [studentInfo, dispatch] = useReducer(reducerAttendance, initState);
 
   return (
     <div>
@@ -62,7 +37,7 @@ function Attendance() {
       <button
         onClick={() => {
           if (name.trim() !== '') {
-            dispatch({ type: 'add', payload: { name } });
+            dispatch({ type: 'add', data: { name } });
             setName('');
           }
         }}>

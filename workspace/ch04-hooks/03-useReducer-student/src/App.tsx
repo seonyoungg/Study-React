@@ -1,12 +1,11 @@
-import Counter from '@components/Counter';
-import Counter2 from '@components/Counter2';
+import Attendance from '@components/Attendance';
 import Header from '@components/Header';
 
 function App() {
   return (
     <>
       <Header />
-      <Counter2>100</Counter2>
+      <Attendance />
     </>
   );
 }
