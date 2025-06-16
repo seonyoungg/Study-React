@@ -15,7 +15,8 @@ function Counter({ children = '1' }: CounterProps) {
   return (
     <div id='counter'>
       <label htmlFor='step'>증감치</label>
-      <input id='step' type='number' value={stepRef.current} onChange={(event) => (stepRef.current = Number(event.target.value))} />
+      {/*  value 가 아닌 defaultValue로 해야함(비제어컴포넌트) */}
+      <input id='step' type='number' defaultValue={stepRef.current} onChange={(event) => (stepRef.current = Number(event.target.value))} />
       <Button color='red' onClick={down}>
         -_-
       </Button>
