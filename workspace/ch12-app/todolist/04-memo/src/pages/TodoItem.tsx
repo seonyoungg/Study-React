@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface TodoItem {
   _id: number;
   title: string;
@@ -11,7 +13,8 @@ interface TodoItemProps {
 }
 
 // TODO 2. 컴포넌트 메모이제이션
-function TodoItem({ item, toggleDone, deleteItem }: TodoItemProps) {
+const TodoItem = React.memo(function TodoItem({ item, toggleDone, deleteItem }: TodoItemProps) {
+  'use no memo';
   console.log('\t\t\t\tTodoItem 렌더링', item);
   return (
     <li>
@@ -22,6 +25,7 @@ function TodoItem({ item, toggleDone, deleteItem }: TodoItemProps) {
       </button>
     </li>
   );
-}
+});
 
 export default TodoItem;
+// export default React.memo(TodoItem);
