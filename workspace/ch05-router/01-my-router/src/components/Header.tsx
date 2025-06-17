@@ -1,14 +1,14 @@
-import Mylink from '@pages/Mylink';
+import MyLink from '@pages/Mylink';
 
 function Header() {
   return (
     <header>
       <h1>리액트 라우터 - 01 클라이언트 라우팅 직접 구현</h1>
-      <Mylink to='/home'>home</Mylink>
+      <MyLink to='/home'>home</MyLink>
       <br />
-      <Mylink to='/page1'>page1</Mylink>
+      <MyLink to='/page1'>page1</MyLink>
       <br />
-      <Mylink to='/page2'>page2</Mylink>
+      <MyLink to='/page2'>page2</MyLink>
     </header>
   );
 }
