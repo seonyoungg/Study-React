@@ -1,3 +1,4 @@
+import type { ResData } from '#types/todo';
 import { useEffect, useState } from 'react';
 
 // API 서버 엔드포인트 주소 상수 정의
@@ -8,38 +9,9 @@ interface FetchParams {
   url: string;
 }
 
-// Todo 아이템의 타입 정의
-interface Todo {
-  _id: number; // Todo 아이템의 고유 식별자
-  title: string; // Todo 제목
-  done: boolean; // 완료 여부
-}
-
-// Todo 목록 조회 성공시 응답 데이터 타입 정의
-interface TodoListRes {
-  ok: 1; // 성공 여부 (1: 성공)
-  items: Todo[]; // Todo 아이템 배열
-  pagination: {
-    // 페이지네이션 정보
-    page: number; // 현재 페이지
-    limit: number; // 페이지당 아이템 수
-    total: number; // 전체 아이템 수
-    totalPages: number; // 전체 페이지 수
-  };
-}
-
-// 에러 응답 데이터 타입 정의
-interface ErrorRes {
-  ok: 0; // 성공 여부 (0: 실패)
-  error: Error; // 에러 객체
-}
-
-// 응답 데이터 타입 정의
-type ResData = TodoListRes | ErrorRes;
-
-function useFetch(fetchParams: FetchParams) {
+function useFetch<T>(fetchParams: FetchParams) {
   // Todo 목록을 저장할 상태 (초기값: null)
-  const [data, setData] = useState<TodoListRes | null>(null);
+  const [data, setData] = useState<T | null>(null);
 
   // 에러 메시지를 저장할 상태 (초기값: null)
   const [error, setError] = useState<Error | null>(null);
@@ -57,6 +29,7 @@ function useFetch(fetchParams: FetchParams) {
       // fetch API를 사용하여 서버에 GET 요청
       const res = await fetch(API_SERVER + params.url);
       console.log('서버 응답:', res);
+
       // 응답 데이터를 JSON 형식으로 파싱
       const jsonRes: ResData = await res.json();
       console.log('파싱된 데이터:', jsonRes);
@@ -64,7 +37,7 @@ function useFetch(fetchParams: FetchParams) {
       // 응답이 성공적인 경우
       if (jsonRes.ok) {
         // Todo 목록 상태 업데이트
-        setData(jsonRes);
+        setData(jsonRes as T);
         setError(null);
       } else {
         // 에러가 발생한 경우 에러 메시지 상태 업데이트
