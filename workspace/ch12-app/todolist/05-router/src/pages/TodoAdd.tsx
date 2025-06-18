@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 function TodoAdd() {
   return (
     <>
-      <div title='할일 추가'>
+      <div id='main'>
         <h2>할일 추가</h2>
         <div className='todo'>
           <form>
@@ -13,7 +13,8 @@ function TodoAdd() {
             <label htmlFor='content'>내용 :</label>
             <textarea id='content' cols={23} rows={5}></textarea>
             <br />
-            <Link to='/todoAdd'>추가</Link>
+            <Link to={`/todoList/3`}>추가</Link>
+            {/* <Link to={`/todoList/${_id}`}>추가</Link> */}
             <Link to='/todoList'>취소</Link>
           </form>
         </div>
