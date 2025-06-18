@@ -35,7 +35,7 @@ function TodoList() {
           <Link to='/todoAdd'>추가</Link>
           <br />
           <form className='search'>
-            <input type='text' autoFocus />
+            <input type='text' autoFocus placeholder='검색어를 입력하세요' />
             <button type='submit'>검색</button>
           </form>
           <ul className='todolist'>{itemList}</ul>
