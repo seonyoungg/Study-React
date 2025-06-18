@@ -6,16 +6,31 @@ import TodoInfo from '@pages/TodoInfo';
 import TodoList from '@pages/TodoList';
 import TodoEdit from '@pages/TodoEdit';
 import TodoAdd from '@pages/TodoAdd';
+import Layout from '@components/Layout';
 
 const router = createBrowserRouter([
-  { path: '/', element: <Navigate to='/home' /> },
-  { path: '/home', element: <Home /> },
-  { path: '/about', element: <About /> },
-  { path: '/errorPage', element: <ErrorPage /> },
-  { path: '/todoInfo', element: <TodoInfo /> },
-  { path: '/todoEdit', element: <TodoEdit /> },
-  { path: '/todoAdd', element: <TodoAdd /> },
-  { path: '/todoList', element: <TodoList /> },
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      // { path: '', element: <Navigate to='/home' /> },
+      { index: true, element: <Home /> },
+      // { path: 'home', element: <Home /> },
+      { path: 'home', element: <Navigate to='/' /> },
+      { path: 'about', element: <About /> },
+      { path: 'todoList', element: <TodoList /> },
+      {
+        path: 'todoList/:_id',
+        element: <TodoInfo />,
+        children: [{ path: 'edit', element: <TodoEdit /> }],
+      },
+      {
+        path: 'todoAdd',
+        element: <TodoAdd />,
+      },
+    ],
+  },
 ]);
 
 export default router;

@@ -1,27 +1,32 @@
-import { Link } from 'react-router';
+import { NavLink } from 'react-router';
 
 function Header() {
   return (
-    <>
-      <header>
-        <h1>Todo List</h1>
-        <nav>
-          <div>
-            <ul>
-              <li>
-                <Link to='/home'>home</Link>
-              </li>
-              <li>
-                <Link to='/about'>About</Link>
-              </li>
-              <li>
-                <Link to='/todoList'>TodoList</Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-    </>
+    <header>
+      <h1>Todo List</h1>
+      <nav>
+        <div>
+          <ul>
+            <li>
+              {/* NavLink => className 지정(콜백함수 넘길 수 있음) */}
+              <NavLink className={({ isActive }) => (isActive ? 'menu-dark' : 'menu')} to='/'>
+                home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className={({ isActive }) => (isActive ? 'menu-dark' : 'menu')} to='/about'>
+                About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className={({ isActive }) => (isActive ? 'menu-dark' : 'menu')} to='/todoList'>
+                TodoList
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
   );
 }
 

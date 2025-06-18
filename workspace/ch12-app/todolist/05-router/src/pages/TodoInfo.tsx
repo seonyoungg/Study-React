@@ -1,24 +1,58 @@
-import Footer from '@components/Footer';
-import Header from '@components/Header';
-import Layout from '@components/Layout';
-import { Link } from 'react-router';
+import { useEffect } from 'react';
+import { Link, Outlet, useMatch, useParams } from 'react-router';
+
+export interface TodoItem {
+  _id: number;
+  title: string;
+  content?: string;
+  done: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+const item = {
+  _id: 2,
+  title: '자바스크립트 복습',
+  content: '리액트도 당연히 복습',
+  done: false,
+  createdAt: '2025.06.17 16:49:00',
+  updatedAt: '2025.06.17 16:49:00',
+};
 
 function TodoInfo() {
+  // useParams : "/list/3" 이렇게 정의된 path값이 있을 때
+  // 주소창의 값이 "/list/3" 일 경우 useParams()가 리턴하는 값이 { _id : 3}
+  const { _id } = useParams();
+  console.log(useParams());
+
+  const infoMatch = useMatch('/todoList/:_id');
+  // const [item, setItem] = useState('');
+
+  // TODO API 서버와 통신해서 item 받아오기
+  // useEffect(() => {
+  //   setItem(dummyItem);
+  // }, []);
+
   return (
     <>
-      <Header />
-      <Layout title='할일 상세 보기'>
+      <div>
+        <h2>할일 상세 보기</h2>
         <div className='todo'>
-          <div>제목 : 잠자기</div>
-          <div>내용 : 주말에 수업 끝나면 잠이나 실컷 자야지</div>
-          <div>상태 : 미완료</div>
-          <div>작성일 : 2025.06.16 12:23:45</div>
-          <div>수정일 : 2025.06.16 13:45:12</div>
-          <Link to='/todoEdit'>수정</Link>
-          <Link to='/todoList'>목록</Link>
+          <div>제목 : {item.title}</div>
+          <div>내용 : {item.content}</div>
+          <div>상태 : {item.done ? '완료' : '미완료'}</div>
+          <div>작성일 : {item.createdAt}</div>
+          <div>수정일 : {item.updatedAt}</div>
+          {infoMatch && (
+            <>
+              <Link to={`/todoList/${_id}/edit`}>수정</Link>
+              <Link to='/todoList'>목록</Link>
+            </>
+          )}
         </div>
-      </Layout>
-      <Footer />
+
+        <Outlet context={{ item }} />
+      </div>
     </>
   );
 }

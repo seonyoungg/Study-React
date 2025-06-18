@@ -1,40 +1,45 @@
-import Footer from '@components/Footer';
-import Header from '@components/Header';
-import { Link } from 'react-router';
+import type { TodoItem } from '@pages/TodoInfo';
+import { Link, useNavigate, useOutletContext } from 'react-router';
+
+interface OutletContextProps {
+  item: TodoItem;
+}
 
 function TodoEdit() {
+  const navigate = useNavigate();
+  const { item } = useOutletContext<OutletContextProps>();
+
+  const updateTodo = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // TODO API서버에 수정요청
+
+    alert('할일이 수정되었습니다');
+
+    // 상세보기로 이동
+    // navigate('/todoList/3');
+    navigate(-1); // window.history.go(-1)
+  };
   return (
     <>
-      <Header />
-      <div id='main'>
-        <h2>할일 상세 보기</h2>
-        <div className='todo'>
-          <div>제목 : 잠자기</div>
-          <div>내용 : 주말에 수업 끝나면 잠이나 실컷 자야지</div>
-          <div>상태 : 미완료</div>
-          <div>작성일 : 2025.06.16 12:23:45</div>
-          <div>수정일 : 2025.06.16 13:45:12</div>
-          <a href='./todoedit.html'>수정</a>
-          <a href='./todolist.html'>목록</a>
-        </div>
-        <h2>할일 수정</h2>
-        <div className='todo'>
-          <form>
-            <label htmlFor='title'>제목 :</label>
-            <input type='text' id='title' value='잠자기' autoFocus />
-            <br />
-            <label htmlFor='content'>내용 :</label>
-            <textarea id='content'>주말에 수업 끝나면 잠이나 실컷 자야지</textarea>
-            <br />
-            <label htmlFor='done'>완료 :</label>
-            <input type='checkbox' id='done' checked />
-            <br />
-            <Link to='/todoInfo'>수정</Link>
-            <Link to='/todoInfo'>취소</Link>
-          </form>
-        </div>
+      <h2>할일 수정</h2>
+      <div className='todo'>
+        <form onSubmit={updateTodo}>
+          <label htmlFor='title'>제목 :</label>
+          <input type='text' id='title' defaultValue={item.title} autoFocus />
+          <br />
+          <label htmlFor='content'>내용 :</label>
+          <textarea id='content' cols={23} rows={5}>
+            {item.content}
+          </textarea>
+          <br />
+          <label htmlFor='done'>완료 :</label>
+          <input type='checkbox' id='done' defaultChecked={item.done} />
+          <br />
+          <button type='submit'>수정</button>
+          <Link to={`/todoList/${item._id}`}>취소</Link>
+        </form>
       </div>
-      <Footer />
     </>
   );
 }

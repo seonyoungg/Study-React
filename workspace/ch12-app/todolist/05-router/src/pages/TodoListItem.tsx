@@ -1,16 +1,17 @@
+import type { TodoItem } from '@pages/TodoInfo';
 import { Link } from 'react-router';
 
-interface itemProps {
-  dataNumber: number;
-  title: string;
+interface TodoListItemProps {
+  item: TodoItem;
 }
-function TodoListItem({ dataNumber, title }: itemProps) {
+
+function TodoListItem({ item }: TodoListItemProps) {
   return (
     <>
       <li>
-        <span>{dataNumber}</span>
+        <span>{item._id}</span>
 
-        <Link to='/todoInfo'>{title}</Link>
+        <Link to={`/todoList/${item._id}`}>{item.title}</Link>
         <Link to='/todoList'>삭제</Link>
       </li>
     </>
