@@ -192,6 +192,15 @@ footer {
 /* ============================
         [Layout]
 ============================ */
+.todoapp > div:has(h2:nth-of-type(2)) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+
+  @media (max-width: 770px) {
+    display: block;
+  }
+}
 
 .todoapp > div {
   padding: 2rem 0;
@@ -202,8 +211,22 @@ footer {
   }
 }
 
+.todoapp > div > h2:first-of-type,
+.todoapp > div > .todo:first-of-type {
+  grid-column: 1/2;
+}
+
 .todoapp > div > h2:not(:first-of-type) {
-  margin-top: 1rem;
+  grid-column: 2/3;
+  grid-row: 1/2;
+
+  @media (max-width: 770px) {
+    margin-top: 1rem;
+  }
+}
+
+.todoapp > div > .todo:not(:first-of-type) {
+  grid-column: 2/3;
 }
 
 /* todolist */
@@ -294,9 +317,10 @@ footer {
 /* todo */
 .todo {
   padding: 1.25rem 1rem;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   background: light-dark(var(--light-bg-color), var(--dark-bg-color));
   border: 1px solid var(--light-border-color, light-dark(var(--light-border-color), var(--dark-border-color)));
+  border-radius: 0.5rem;
 
   p {
     color: light-dark(var(--dark-grey), var(--dark-text-color));
@@ -320,6 +344,10 @@ footer {
 
   &:hover {
     background: var(--light-primary-dark-color, #4056a1);
+  }
+
+  @media (max-width: 500px) {
+    right: 1rem;
   }
 }
 
@@ -355,6 +383,7 @@ footer {
   input,
   textarea {
     width: 100%;
+    font-family: "맑은고딕", sans-serif;
   }
 
   input[type="checkbox"] {

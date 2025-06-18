@@ -10,7 +10,7 @@ function Header() {
             <li>
               {/* NavLink => className 지정(콜백함수 넘길 수 있음) */}
               <NavLink className={({ isActive }) => (isActive ? 'menu-dark' : 'menu')} to='/'>
-                home
+                Home
               </NavLink>
             </li>
             <li>
