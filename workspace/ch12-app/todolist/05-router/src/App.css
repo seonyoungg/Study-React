@@ -46,6 +46,10 @@ a {
   color: inherit;
 }
 
+br {
+  display: none;
+}
+
 ul,
 li {
   list-style: none;
@@ -188,8 +192,10 @@ footer {
 /* ============================
         [Layout]
 ============================ */
+
 .todoapp > div {
   padding: 2rem 0;
+  position: relative;
 
   @media (max-width: 770px) {
     padding: 2rem 1rem;
@@ -205,6 +211,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-top: 1.25rem;
 
   li {
     display: grid;
@@ -226,6 +233,7 @@ footer {
       word-break: break-all;
       overflow: hidden;
     }
+
     /* 삭제버튼 */
     a:last-of-type {
       position: relative;
@@ -244,8 +252,11 @@ footer {
         display: inline-block;
         font-size: 0.75rem;
       }
+
       &:hover {
-        background: #e6e6e6;
+        background: var(--dark-grey);
+        border: 1px solid var(--dark-grey);
+        color: var(--light-bg-color);
       }
     }
   }
@@ -271,6 +282,7 @@ footer {
     border: none;
     border-radius: 0.875rem;
     cursor: pointer;
+    transform: none;
     transition: background 0.3s;
 
     &:hover {
@@ -279,36 +291,47 @@ footer {
   }
 }
 
-/* 추가버튼 */
-.todo > a {
-  display: inline-flex;
-  padding: 0.25rem 1rem;
-  width: fit-content;
-  background: light-dark(var(--light-bg-color), var(--dark-bg-color));
-  font-size: 0.875rem;
-  border: 1px solid var(--light-border-color, #dee2e6);
-  border-radius: 0.875rem;
-  transition: all 0.3s;
-
-  &:not(:first-of-type) {
-    margin-left: 0.5rem;
-  }
-
-  &:hover {
-    background: var(--dark-grey, #666);
-    color: var(--light-bg-color, #fff);
-  }
-}
-
 /* todo */
 .todo {
-  padding: 1rem;
+  padding: 1.25rem 1rem;
   margin-top: 0.5rem;
   background: light-dark(var(--light-bg-color), var(--dark-bg-color));
   border: 1px solid var(--light-border-color, light-dark(var(--light-border-color), var(--dark-border-color)));
 
   p {
     color: light-dark(var(--dark-grey), var(--dark-text-color));
+  }
+}
+
+/* 추가버튼 */
+.todo > a {
+  position: absolute;
+  top: 2.375rem;
+  right: 0;
+
+  display: inline-flex;
+  padding: 0.25rem 1rem;
+  width: fit-content;
+  background: var(--light-primary-color, #667ecc);
+  color: var(--light-bg-color, #fff);
+  font-size: 0.875rem;
+  border-radius: 0.875rem;
+  transition: all 0.3s;
+
+  &:hover {
+    background: var(--light-primary-dark-color, #4056a1);
+  }
+}
+
+.todo > a + a {
+  transform: translateX(calc(-100% - 0.25rem));
+  color: light-dark(var(--light-text-color), var(--dark-text-color));
+  background: light-dark(var(--light-bg-color), var(--dark-bg-color));
+  border: 1px solid var(--light-border-color, #dee2e6);
+
+  &:hover {
+    background: var(--dark-grey, #666);
+    color: var(--light-bg-color, #fff);
   }
 }
 
@@ -329,10 +352,6 @@ footer {
   justify-content: space-between;
   padding-bottom: 3rem;
 
-  br {
-    display: none;
-  }
-
   input,
   textarea {
     width: 100%;
@@ -345,7 +364,9 @@ footer {
   button {
     position: absolute;
     bottom: 0;
-    left: 0;
+    /* left: 0; */
+    right: 0;
+    transform: translateX(calc(-100% - 0.5rem));
 
     padding: 0.375rem 1rem;
     background: var(--light-primary-color, #667ecc);
@@ -363,8 +384,8 @@ footer {
   a {
     position: absolute;
     bottom: 0;
-    left: 0.25rem;
-    transform: translateX(100%);
+    right: 0;
+    transform: translateX(calc(-100% - 0.375rem));
 
     display: inline-flex;
     padding: 0.25rem 1rem;
@@ -376,17 +397,17 @@ footer {
     border-radius: 0.875rem;
     transition: all 0.3s;
 
-    &:not(:first-of-type) {
-      margin-left: 0.5rem;
-    }
-
     &:hover {
       background: var(--dark-grey, #666);
       color: var(--light-bg-color, #fff);
     }
   }
 
+  button + a {
+    transform: none;
+  }
+
   a + a {
-    transform: translateX(200%);
+    transform: none;
   }
 }
