@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router';
 
 function TodoAdd() {
+  const axiosInstance = useAxiosInstance();
   // const navigate = useNavigate();
 
   // TODO 과제 : 리셋 안되는 문제 해결하기
@@ -15,11 +16,11 @@ function TodoAdd() {
     formState: { errors },
   } = useForm<TodoItem>();
 
-  const addTodo = (formData: TodoItem) => {
-    const axiosInstance = useAxiosInstance();
+  const addTodo = async (formData: TodoItem) => {
     console.log('API 서버 등록 요청', formData);
 
     // TODO API 서버에 등록요청
+    await axiosInstance.post('/todolist', formData);
     alert('할일이 등록되었습니다.');
     reset();
     setFocus('title');
