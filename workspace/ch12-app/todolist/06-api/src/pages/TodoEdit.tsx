@@ -1,14 +1,19 @@
+import useAxiosInstance from '@hooks/useAxiosInstance';
 import type { TodoItem } from '@pages/TodoInfo';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate, useOutletContext } from 'react-router';
+import { Link, useNavigate, useOutletContext, useParams } from 'react-router';
 
 interface OutletContextProps {
   item: TodoItem;
+  setData: (data: TodoItem) => void;
 }
 
 function TodoEdit() {
+  const axiosInstance = useAxiosInstance();
+  const { _id } = useParams();
   const navigate = useNavigate();
-  const { item } = useOutletContext<OutletContextProps>();
+  const { item, setData } = useOutletContext<OutletContextProps>();
+
   const {
     register,
     handleSubmit,
@@ -21,17 +26,26 @@ function TodoEdit() {
     },
   });
 
-  const updateTodo = (formData: TodoItem) => {
+  const updateTodo = async (formData: TodoItem) => {
     console.log('API 서버에 수정 요청', formData);
     // TODO API서버에 수정요청
 
-    alert('할일이 수정되었습니다');
+    try {
+      const res = await axiosInstance.patch<{ item: TodoItem }>(`/todolist/${_id}`, formData);
+      setData(res.data?.item);
+
+      alert('할일이 수정되었습니다');
+    } catch (err) {
+      console.error(err);
+      alert('할일 수정 실패하였습니다.');
+    }
 
     // 상세보기로 이동
     // navigate('/list/3');
     // navigate(-1); // window.history.go(-1)
-    navigate(`/list/&{item._id}`);
+    navigate(`/list/${_id}`);
   };
+
   return (
     <>
       <h2>할일 수정</h2>

@@ -6,8 +6,8 @@
   /* color-scheme: light dark; */
 
   /* 아래 두개로 주조색 변경 가능 */
-  --light-primary-color: #69cc66;
-  --light-primary-dark-color: #1e7545;
+  --light-primary-color: #cc667c;
+  --light-primary-dark-color: #751e54;
 
   --light-bg-color: #fff;
   --dark-grey: #666;
@@ -270,6 +270,7 @@ footer {
       border-radius: 0.875rem;
       transition: all 0.3s;
       color: var(--dark-grey, #666);
+      cursor: pointer;
 
       &::before {
         content: "🗑️";

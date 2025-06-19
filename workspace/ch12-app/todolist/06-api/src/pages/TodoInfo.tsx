@@ -1,6 +1,6 @@
 import useAxiosInstance from '@hooks/useAxiosInstance';
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useMatch, useParams } from 'react-router';
+import { Link, Outlet, useLocation, useMatch, useNavigate, useParams } from 'react-router';
 
 export interface TodoItem {
   _id: number;
@@ -13,6 +13,7 @@ export interface TodoItem {
 
 function TodoInfo() {
   const axiosInstance = useAxiosInstance();
+
   // "/list/:_id" 정의된 path 값이 있을 때
   // 주소창의 값이 "/list/3" 일 경우 useParams()가 리턴하는 값: { _id: 3 }
   const { _id } = useParams();
@@ -23,16 +24,30 @@ function TodoInfo() {
 
   const [data, setData] = useState<TodoItem | null>(null);
 
+  const navigate = useNavigate();
+  // const location = useLocation();
+
   const fetchTodoInfo = async () => {
     console.log('API 서버에 상세 정보 요청');
-    const res = await axiosInstance.get<{ item: TodoItem }>(`/todolist/${_id}`);
 
-    setData(res.data?.item);
+    try {
+      const res = await axiosInstance.get<{ item: TodoItem }>(`/todolist/${_id}`);
+      setData(res.data?.item);
+    } catch (err) {
+      console.error(err);
+
+      alert('할일 조회에 실패했습니다.');
+      navigate('/list');
+    }
   };
 
   useEffect(() => {
     fetchTodoInfo();
-  }, []); // 빈 배열을 전달해서 마운트시에만 실행
+  }, []);
+
+  // useEffect(() => {
+  //   fetchTodoInfo();
+  // }, [location.pathname]); // 빈 배열을 전달해서 마운트시에만 실행
 
   return (
     <div id='main'>
@@ -55,7 +70,7 @@ function TodoInfo() {
             )}
           </div>
 
-          <Outlet context={{ item: data }} />
+          <Outlet context={{ item: data, setData }} />
         </>
       )}
     </div>

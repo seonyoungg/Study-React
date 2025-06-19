@@ -11,20 +11,26 @@ function TodoAdd() {
   const {
     register,
     handleSubmit,
-    reset,
+    resetField,
     setFocus,
     formState: { errors },
-  } = useForm<TodoItem>();
+  } = useForm<TodoItem>({});
 
   const addTodo = async (formData: TodoItem) => {
     console.log('API 서버 등록 요청', formData);
 
-    // TODO API 서버에 등록요청
-    await axiosInstance.post('/todolist', formData);
-    alert('할일이 등록되었습니다.');
-    reset();
-    setFocus('title');
+    try {
+      // TODO API 서버에 등록요청
+      await axiosInstance.post('/todolist', formData);
+      alert('할일이 등록되었습니다.');
+      resetField('title');
+      resetField('content');
 
+      setTimeout(() => setFocus('title'), 0);
+    } catch (err) {
+      alert('할일 등록이 실패했습니다.');
+      console.error(err);
+    }
     // navigate(`/list`);
   };
 

@@ -25,24 +25,38 @@ interface TodoList {
 // };
 
 function TodoList() {
-  const axios = useAxiosInstance();
+  const axiosInstance = useAxiosInstance();
   const [data, setData] = useState<TodoList | null>(null);
 
   // 할일 목록을 API 서버에서 조회
   const fetchTodoList = async () => {
     console.log('API 서버에 목록 요청해야 한다.');
     // TODO API 서버에 목록 요청
-    const res = await axios.get<TodoList>('/todolist');
 
-    setData(res.data);
+    try {
+      const res = await axiosInstance.get<TodoList>('/todolist');
+
+      setData(res.data);
+    } catch (err) {
+      console.error(err);
+      alert('할일 목록 조회에 실패했습니다.');
+    }
   };
 
   // 삭제 처리
-  const handleDelete = (_id: number) => {
+  const handleDelete = async (_id: number) => {
     console.log('API 서버에 삭제 요청', _id);
 
     // TODO API 서버에 삭제 요청
-    alert('삭제 완료');
+    try {
+      await axiosInstance.delete(`/todolist/${_id}`);
+      fetchTodoList();
+      alert('삭제 완료');
+    } catch (err) {
+      console.error(err);
+      alert('데이터 삭제에 실패하였습니다.');
+    }
+
     // TODO API 서버에 목록 요청
     fetchTodoList();
   };
