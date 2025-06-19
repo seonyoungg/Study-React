@@ -3,16 +3,23 @@ import { Link } from 'react-router';
 
 interface TodoListItemProps {
   item: TodoItem;
+  handleDelete: (_id: number) => void;
 }
 
-function TodoListItem({ item }: TodoListItemProps) {
+function TodoListItem({ item, handleDelete }: TodoListItemProps) {
   return (
     <>
       <li>
         <span>{item._id}</span>
 
-        <Link to={`/todoList/${item._id}`}>{item.title}</Link>
-        <Link to='/todoList'>삭제</Link>
+        <Link to={`/list/${item._id}`}> {item.done ? <s>{item.title}</s> : item.title}</Link>
+        <button
+          type='button'
+          onClick={() => {
+            handleDelete(item._id);
+          }}>
+          삭제
+        </button>
       </li>
     </>
   );

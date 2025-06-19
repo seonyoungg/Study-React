@@ -2,11 +2,12 @@
         기본스타일
 ============================ */
 :root {
-  color-scheme: light dark;
+  /* 설정과 무관하게 라이트테마 쓰고 싶으시면 아래 주석처리 */
+  /* color-scheme: light dark; */
 
-  /* 주조색 변경 가능 */
-  --light-primary-color: #667ecc;
-  --light-primary-dark-color: #4056a1;
+  /* 아래 두개로 주조색 변경 가능 */
+  --light-primary-color: #cc6666;
+  --light-primary-dark-color: #751e22;
 
   --light-bg-color: #fff;
   --dark-grey: #666;
@@ -258,7 +259,7 @@ footer {
     }
 
     /* 삭제버튼 */
-    a:last-of-type {
+    button:last-of-type {
       position: relative;
       display: flex;
       gap: 0.25rem;
@@ -346,7 +347,7 @@ footer {
     background: var(--light-primary-dark-color, #4056a1);
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 780px) {
     right: 1rem;
   }
 }
@@ -439,4 +440,11 @@ footer {
   a + a {
     transform: none;
   }
+}
+
+/* input - errormessage */
+.input-error {
+  grid-column: 1/-1;
+  font-weight: 500;
+  color: rgb(218, 0, 0);
 }

@@ -19,7 +19,7 @@ function Header() {
               </NavLink>
             </li>
             <li>
-              <NavLink className={({ isActive }) => (isActive ? 'menu-dark' : 'menu')} to='/todoList'>
+              <NavLink className={({ isActive }) => (isActive ? 'menu-dark' : 'menu')} to='/list'>
                 TodoList
               </NavLink>
             </li>

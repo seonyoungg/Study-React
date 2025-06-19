@@ -19,9 +19,9 @@ const router = createBrowserRouter([
       // { path: 'home', element: <Home /> },
       { path: 'home', element: <Navigate to='/' /> },
       { path: 'about', element: <About /> },
-      { path: 'todoList', element: <TodoList /> },
+      { path: 'list', element: <TodoList /> },
       {
-        path: 'todoList/:_id',
+        path: 'list/:_id',
         element: <TodoInfo />,
         children: [{ path: 'edit', element: <TodoEdit /> }],
       },

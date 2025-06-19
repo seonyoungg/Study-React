@@ -1,21 +1,65 @@
-import { Link } from 'react-router';
+import type { TodoItem } from '@pages/TodoInfo';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router';
 
 function TodoAdd() {
+  // const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TodoItem>();
+
+  const addTodo = (formData: TodoItem) => {
+    console.log('API 서버 등록 요청', formData);
+
+    // TODO API 서버에 등록요청
+    alert('할일이 등록되었습니다.');
+
+    // navigate(`/list/&{item._id}`);
+  };
+
   return (
     <>
       <div id='main'>
         <h2>할일 추가</h2>
         <div className='todo'>
           <form>
+            {/* 제목 */}
             <label htmlFor='title'>제목 :</label>
-            <input type='text' id='title' autoFocus />
+            <input
+              type='text'
+              id='title'
+              autoFocus
+              {...register('title', {
+                required: '제목을 입력하세요',
+                pattern: {
+                  value: /\S/,
+                  message: '제목에 공백만 입력할 수 없습니다.',
+                },
+              })}
+            />
             <br />
+            <div className='input-error'>{errors.title?.message}</div>
+
+            {/* 내용 */}
             <label htmlFor='content'>내용 :</label>
-            <textarea id='content' cols={23} rows={5}></textarea>
+            <textarea
+              id='content'
+              cols={23}
+              rows={5}
+              {...register('content', {
+                required: '내용을 입력하세요',
+                pattern: {
+                  value: /\S/,
+                  message: '내용에 공백만 입력할 수 없습니다.',
+                },
+              })}></textarea>
             <br />
-            <Link to={`/todoList/3`}>추가</Link>
-            {/* <Link to={`/todoList/${_id}`}>추가</Link> */}
-            <Link to='/todoList'>취소</Link>
+            <div className='input-error'>{errors.content?.message}</div>
+
+            <button type='submit'>추가</button>
+            <Link to='/list'>취소</Link>
           </form>
         </div>
       </div>
