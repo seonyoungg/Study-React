@@ -1,3 +1,4 @@
+import useAxiosInstance from '@hooks/useAxiosInstance';
 import type { TodoItem } from '@pages/TodoInfo';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router';
@@ -15,6 +16,7 @@ function TodoAdd() {
   } = useForm<TodoItem>();
 
   const addTodo = (formData: TodoItem) => {
+    const axiosInstance = useAxiosInstance();
     console.log('API 서버 등록 요청', formData);
 
     // TODO API 서버에 등록요청

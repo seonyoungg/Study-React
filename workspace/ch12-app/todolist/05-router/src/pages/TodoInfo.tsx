@@ -1,7 +1,7 @@
 import useAxiosInstance from '@hooks/useAxiosInstance';
-import { Link, Outlet, useParams, useMatch } from 'react-router';
-import { useState, useEffect, use } from 'react';
-// useParams()는 브라우저에 명시한 URL 파라미터의 값을 가져오는 커스텀 훅
+import { useEffect, useState } from 'react';
+import { Link, Outlet, useMatch, useParams } from 'react-router';
+
 export interface TodoItem {
   _id: number;
   title: string;
@@ -11,23 +11,14 @@ export interface TodoItem {
   updatedAt: string;
 }
 
-const item = {
-  _id: 2,
-  title: '자바스크립트 복습',
-  content: '리액트도 당연히 복습.',
-  done: false,
-  createdAt: '2025.06.17 16:49:00',
-  updatedAt: '2025.06.17 16:49:00',
-};
-
 function TodoInfo() {
   const axiosInstance = useAxiosInstance();
-
   // "/list/:_id" 정의된 path 값이 있을 때
   // 주소창의 값이 "/list/3" 일 경우 useParams()가 리턴하는 값: { _id: 3 }
-  // useParams()는 브라우저에 명시한 URL 파라미터의 값을 가져오는 커스텀 훅
   const { _id } = useParams();
+
   console.log(useParams());
+
   const infoMatch = useMatch('/list/:_id');
 
   const [data, setData] = useState<TodoItem | null>(null);
@@ -41,7 +32,7 @@ function TodoInfo() {
 
   useEffect(() => {
     fetchTodoInfo();
-  }, []);
+  }, []); // 빈 배열을 전달해서 마운트시에만 실행
 
   return (
     <div id='main'>
@@ -50,24 +41,23 @@ function TodoInfo() {
       {data && (
         <>
           <div className='todo'>
-            <div>제목 : {item.title}</div>
-            <div>내용 : {item.content}</div>
-            <div>상태 : {item.done ? '완료' : '미완료'}</div>
-            <div>작성일 : {item.createdAt}</div>
-            <div>수정일 : {item.updatedAt}</div>
-            {/* 현재 URL이 특정 경로인지 조건부 렌더링할때 useMatch 사용 */}
-            {infoMatch && ( // 상세보기 화면에서만 노출
+            <div>제목 : {data.title}</div>
+            <div>내용 : {data.content}</div>
+            <div>상태 : {data.done ? '완료' : '미완료'}</div>
+            <div>작성일 : {data.createdAt}</div>
+            <div>수정일 : {data.updatedAt}</div>
+
+            {infoMatch && (
               <>
                 <Link to={`/list/${_id}/edit`}>수정</Link>
                 <Link to='/list'>목록</Link>
               </>
             )}
           </div>
-          <Outlet context={{ item }} />
+
+          <Outlet context={{ item: data }} />
         </>
       )}
-
-      {/*  자식 라우트가 렌더링되는 위치 */}
     </div>
   );
 }
