@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router';
 
 function TodoAdd() {
   // const navigate = useNavigate();
-
-  // TODO 과제 : 리셋 안되는 문제 해결하기
   const {
     register,
     handleSubmit,
