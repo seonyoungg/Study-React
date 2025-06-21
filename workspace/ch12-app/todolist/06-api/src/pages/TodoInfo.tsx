@@ -12,6 +12,7 @@ export interface TodoItem {
 }
 
 function TodoInfo() {
+  Object.is({ hello: 'world' }, { hello: 'world' });
   const axiosInstance = useAxiosInstance();
 
   // "/list/:_id" 정의된 path 값이 있을 때

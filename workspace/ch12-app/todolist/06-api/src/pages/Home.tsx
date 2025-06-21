@@ -1,4 +1,11 @@
+import { useEffect } from 'react';
+
 function Home() {
+  // Object.is 관련 공부
+  useEffect(() => {
+    console.log(Object.is({ hello: 'world' }, { hello: 'world' }));
+  }, []);
+
   return (
     <>
       <div id='main'>
