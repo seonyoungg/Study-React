@@ -4,6 +4,9 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router';
 
 function TodoAdd() {
+  // React Compiler의 기능을 사용하지 않겠다는 선언
+  // 'use no memo';
+
   const axiosInstance = useAxiosInstance();
   // const navigate = useNavigate();
 
@@ -11,7 +14,8 @@ function TodoAdd() {
   const {
     register,
     handleSubmit,
-    resetField,
+    reset,
+    // resetField,
     setFocus,
     formState: { errors },
   } = useForm<TodoItem>({});
@@ -23,8 +27,9 @@ function TodoAdd() {
       // TODO API 서버에 등록요청
       await axiosInstance.post('/todolist', formData);
       alert('할일이 등록되었습니다.');
-      resetField('title');
-      resetField('content');
+      reset();
+      // resetField('title');
+      // resetField('content');
 
       setTimeout(() => setFocus('title'), 0);
     } catch (err) {
