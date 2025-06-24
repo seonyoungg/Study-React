@@ -10,7 +10,6 @@ const useAxiosInstance = () => {
       'Content-Type': 'application/json', // 요청 바디의 데이터 타입 선언
       // 설정하지 않으면 크롬일 경우 application/json, text/plain 등으로 자동 설정됨
       Accept: 'application/json', // 응답 데이터 타입이 JSON이면 좋겠다~
-      'Client-Id': 'openmarket',
     },
   });
   return instance;
