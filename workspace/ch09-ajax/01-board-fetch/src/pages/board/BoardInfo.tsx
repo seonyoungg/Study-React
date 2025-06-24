@@ -54,6 +54,7 @@ function BoardInfo() {
           <h2>{data.title}</h2>
           <p>{data.content}</p>
           <CommentList />
+          {/* <CommentList replies={data.replies} /> */}
         </>
       )}
     </>
