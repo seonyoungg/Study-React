@@ -1,11 +1,16 @@
 import useAxiosInstance from '@/hooks/useAxiosInstance';
 import CommentList from '@/pages/board/CommentList';
-import type { BoardInfoType } from '@/types/BoardType';
+import type { BoardInfoType, ReplyListResType } from '@/types/BoardType';
 import { useEffect, useState } from 'react';
 
 function BoardInfo() {
+  // 서버의 데이터를 저장할 상태
   const [data, setData] = useState<BoardInfoType | null>(null);
+
+  // 로딩 상태
   const [isLoading, setIsLoading] = useState(false);
+
+  // 에러 상태
   const [error, setError] = useState<Error | null>(null);
 
   //axios instance
@@ -17,13 +22,15 @@ function BoardInfo() {
       // 로딩상태 true 지정
       setIsLoading(true);
 
-      const response = await axios.get<BoardInfoType>('/posts/1?delay=1000');
-
-      // 게시물 상세 정보 출력
+      const response = await axios.get<ReplyListResType>('/posts/1', {
+        params: {
+          delay: 1000,
+        },
+      });
       setData(response.data.item);
-      setError(null);
     } catch (err) {
       setError(err as Error);
+      setData(null);
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -45,7 +52,6 @@ function BoardInfo() {
           <h2>{data.title}</h2>
           <p>{data.content}</p>
           <CommentList />
-          {/* <CommentList replies={data.replies} /> */}
         </>
       )}
     </>
