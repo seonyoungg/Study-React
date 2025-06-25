@@ -18,7 +18,7 @@ const CounterContext = createContext<CounterContextType>({
 // 3. Provider 컴포넌트를 만들어서 export
 export function CounterProvider({ children }: { children: React.ReactNode }) {
   // 4. 상태 관련 작업을 정의
-  const [count, setCount] = useState(3);
+  const [count, setCount] = useState(0);
   const countUp = (step: number) => {
     setCount(count + step);
   };
