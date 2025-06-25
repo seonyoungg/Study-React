@@ -1,13 +1,19 @@
+import type { CountProps } from '@/types/HandleProps';
 import { useEffect } from 'react';
 
-function Right3() {
-  useEffect(()=>{
+function Right3({ handleCountUp }: CountProps) {
+  useEffect(() => {
     console.log('#### Right3 렌더링.');
   });
   return (
     <div>
       <h3>Right3</h3>
-      <button onClick={ () => {} }>+1</button>
+      <button
+        onClick={() => {
+          handleCountUp(2);
+        }}>
+        +1
+      </button>
     </div>
   );
 }

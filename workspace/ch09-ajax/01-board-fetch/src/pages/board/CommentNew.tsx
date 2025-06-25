@@ -30,7 +30,11 @@ function CommentNew() {
   const handleAddComment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(e.currentTarget); // e.target & e.currentTarget => form
+
+    // console.log('currentTarget', e.currentTarget); // form // 타입스크립트에서는
+    // console.log('target', e.target); // form
+
     // formData.append('content', content);
     // console.log('content', content);
 
@@ -39,6 +43,7 @@ function CommentNew() {
   return (
     <>
       <h4>댓글 등록</h4>
+      {/* <form onClick ></form> e.target => button, e.currentTarget => form*/}
       <form onSubmit={handleAddComment}>
         <textarea name='content' value={content} onChange={(e) => setContent(e.target.value)} rows={3} cols={30} placeholder='댓글 내용' />
         <br />

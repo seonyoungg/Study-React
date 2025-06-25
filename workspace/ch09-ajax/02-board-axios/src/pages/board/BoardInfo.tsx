@@ -30,7 +30,7 @@ function BoardInfo() {
     } catch (err) {
       setError(err as Error);
       setData(null);
-      console.error(err);
+      // console.error(err);
     } finally {
       // 성공, 실패와 상관 없이 로딩 상태를 false로 지정
       setIsLoading(false);
