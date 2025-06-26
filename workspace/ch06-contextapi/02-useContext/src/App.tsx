@@ -26,7 +26,7 @@ function App() {
       <div id='container'>
         <h1>App</h1>
         <div id='grid'>
-          {/*  3. Context 제 공하기 */}
+          {/*  3. Context 제공하기 */}
           <CounterContext value={value}>
             <Left1 />
             <Right1 />
