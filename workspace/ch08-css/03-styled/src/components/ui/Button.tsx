@@ -1,14 +1,25 @@
-import styles from './Button.module.css';
+import styled from 'styled-components';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: string;
   bg?: string;
 }
 
-function Button({ children, bg, color, ...rest }: ButtonProps){
-  return (
-    <button className={`${styles.button} ${styles[`bg-${bg}-text-${color}`]}`} {...rest}>{ children }</button>
-  );
+const BasicButtonStyle = styled.button<ButtonProps>`
+  background-color: ${(props) => props.bg || '#222'};
+  border: none;
+  color: ${(props) => props.color || 'white'};
+  padding: 6px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 6px;
+`;
+function Button({ children, bg, color, ...rest }: ButtonProps) {
+  return <BasicButtonStyle {...rest}>{children}</BasicButtonStyle>;
 }
 
 export default Button;
