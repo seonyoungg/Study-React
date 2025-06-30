@@ -1,14 +1,19 @@
-import Button from "@/components/ui/Button";
+import Button from '@/components/ui/Button';
 
-function App(){
+function App() {
   return (
     <>
-      <h1>04 Tailwind CSS</h1>
+      <h1>03 Styled Components</h1>
 
-      <Button type="button">그냥 버튼</Button>
-      <Button type="button" bg="blue" color="red">파란 버튼</Button>
-      <Button type="submit" bg="gray" color="blue">submit 버튼</Button>
-
+      <Button type='button' bg='gray' size='sm' data-name='default'>
+        버튼
+      </Button>
+      <Button type='button' bg='yellow' size='md'>
+        취소버튼
+      </Button>
+      <Button type='submit' bg='red' size='lg'>
+        submit 버튼
+      </Button>
     </>
   );
 }

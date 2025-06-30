@@ -31,6 +31,8 @@ export function CounterProvider({ children }: { children: React.ReactNode }) {
 
   const value = { count, countUp, reset, countDown };
 
+  // return <CounterContext.Provider value={value}>{children}</CounterContext.Provider>;
+  // React19 이전에서는 .Provider형태로 사용
   return <CounterContext value={value}>{children}</CounterContext>;
 }
 
