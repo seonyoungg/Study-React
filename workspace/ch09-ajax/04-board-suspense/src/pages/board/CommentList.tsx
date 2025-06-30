@@ -1,13 +1,13 @@
 import useAxiosInstance from '@/hooks/useAxiosInstance';
 import CommentNew from '@/pages/board/CommentNew';
 import type { ReplyListResType } from '@/types/BoardType';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 function CommentList() {
   // axios instance
   const axios = useAxiosInstance();
 
-  const { data, error } = useSuspenseQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['posts', 1, 'replies'],
     queryFn: () =>
       axios.get('posts/1/replies?delay=1000', {
@@ -40,7 +40,9 @@ function CommentList() {
   const replyList = data?.map((reply) => <li key={reply._id}>{reply.content}</li>);
 
   let content = null;
-  if (error) {
+  if (isLoading) {
+    content = <p>댓글 로딩중...</p>;
+  } else if (error) {
     content = <p>{error.message}</p>;
   } else if (data) {
     content = (
