@@ -1,5 +1,11 @@
-import ListItem from '@/app/info/ListItem';
+import ListItem from '@/app/[boardType]/ListItem';
 import Link from 'next/link';
+
+export interface ListPageProps {
+  params: Promise<{
+    boardType: string;
+  }>;
+}
 
 export default async function ListPage() {
   return (

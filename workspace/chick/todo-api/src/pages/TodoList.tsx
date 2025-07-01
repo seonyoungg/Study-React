@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import useAxiosInstance from '../hooks/useAxiosInstance';
 import TodoItem, { type TodoItem as TodoItemType } from './TodoItem';
 
@@ -10,7 +10,7 @@ interface TodoListPropType {
 
 function TodoList({ itemList, deleteItem, toggleDone }: TodoListPropType) {
   const axiosInstance = useAxiosInstance();
-  const [itemList, setItemList] = useState();
+  // const [itemList, setItemList] = useState();
 
   // 서버로부터 목록 수신
   // const fetchList = () => {
