@@ -1,5 +1,4 @@
 'use client';
-// client 컴포넌트
 
 import Link from 'next/link';
 import './globals.css';
@@ -9,7 +8,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   // 주소창의 path 값 추출
   const pathname = usePathname();
   console.log(pathname);
-
+  // const isActive = (path: string) => pathname.startsWith(path) ? 'cs-active' : '';
   const isActive = (path: string) => (pathname === path ? 'cs-active' : '');
 
   return (
@@ -19,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav>
             <ul className='flex space-x-4'>
               <li>
-                <Link href='/' className={`hover:underline  ${isActive('')}`}>
+                <Link href='/' className={`hover:underline ${isActive('/')}`}>
                   Home
                 </Link>
               </li>
