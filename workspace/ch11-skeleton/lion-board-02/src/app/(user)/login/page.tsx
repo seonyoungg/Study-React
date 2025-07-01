@@ -1,4 +1,14 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '로그인 - 멋사컴',
+  openGraph: {
+    title: '로그인 - 멋사컴',
+    description: '로그인 페이지',
+    url: '/user/login',
+  },
+};
 
 export default async function LoginPage() {
   return (
@@ -30,7 +40,7 @@ export default async function LoginPage() {
             <button type='submit' className='bg-orange-500 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded'>
               로그인
             </button>
-            <Link href='/user/signup' className='ml-8 text-gray-800 hover:underline'>
+            <Link href='/signup' className='ml-8 text-gray-800 hover:underline'>
               회원가입
             </Link>
           </div>

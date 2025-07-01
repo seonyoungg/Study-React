@@ -1,6 +1,31 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
 
-export default async function NewPage() {
+interface NewPageProps {
+  params: Promise<{
+    boardType: string;
+  }>;
+}
+
+export async function generateMetadata({ params }: NewPageProps): Promise<Metadata> {
+  const { boardType } = await params;
+
+  return {
+    title: `${boardType} - 게시글 등록`,
+    description: `${boardType} - 게시글을 등록하세요.`,
+    openGraph: {
+      title: `${boardType} - 게시글 등록`,
+      description: `${boardType} - 게시글을 등록하세요.`,
+      url: `/${boardType}/new`,
+      images: {
+        url: '/images/front-end.png',
+      },
+    },
+  };
+}
+
+export default async function NewPage({ params }: NewPageProps) {
+  const { boardType } = await params;
   return (
     <main className='flex-1 min-w-[320px] p-4'>
       <div className='text-center py-4'>
@@ -32,7 +57,7 @@ export default async function NewPage() {
             <button type='submit' className='bg-orange-500 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded'>
               등록
             </button>
-            <Link href='/info' className='bg-gray-900 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded'>
+            <Link href={`/${boardType}`} className='bg-gray-900 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded'>
               취소
             </Link>
           </div>

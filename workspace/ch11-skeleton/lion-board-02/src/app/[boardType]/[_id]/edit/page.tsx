@@ -1,13 +1,37 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
+interface EditPageProps {
+  params: Promise<{
+    boardType: string;
+    _id: string;
+  }>;
+}
 
-export default async function EditPage() {
+export async function generateMetadata({ params }: EditPageProps): Promise<Metadata> {
+  const { boardType, _id } = await params;
+  return {
+    title: `${boardType} - 게시글 수정`,
+    description: `${boardType} - 게시글을 수정하세요.`,
+    openGraph: {
+      title: `${boardType} - 게시글 수정`,
+      description: `${boardType} - 게시글을 수정하세요.`,
+      url: `/${boardType}/${_id}/edit`,
+      images: {
+        url: '/images/front-end.png',
+      },
+    },
+  };
+}
+
+export default async function EditPage({ params }: EditPageProps) {
+  const { boardType, _id } = await params;
   return (
     <main className='flex-1 min-w-[320px] p-4'>
       <div className='text-center py-4'>
         <h2 className='text-2xl font-bold text-gray-700 dark:text-gray-200'>게시글 수정</h2>
       </div>
       <section className='mb-8 p-4'>
-        <form action='/info/1'>
+        <form action={`/${boardType}/${_id}`}>
           <div className='my-4'>
             <label className='block text-lg content-center' htmlFor='title'>
               제목
@@ -36,7 +60,7 @@ export default async function EditPage() {
             <button type='submit' className='bg-orange-500 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded'>
               수정
             </button>
-            <Link href='/info/1' className='bg-gray-900 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded'>
+            <Link href={`/${boardType}/${_id}`} className='bg-gray-900 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded'>
               취소
             </Link>
           </div>
