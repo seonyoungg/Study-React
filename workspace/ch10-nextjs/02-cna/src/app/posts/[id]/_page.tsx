@@ -17,7 +17,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
 // nextjs15부터는 params가 비동기 방식으로 넘어오기때문에 params를 사용할때는 async await을 붙여줘야한다.
 export default async function InfoPage({ params }: { params: { id: string } }) {
-  const pageParams = await params;
-  console.log('pageParams', pageParams);
-  return <h1>상세 조회 - {pageParams.id}번 게시물</h1>;
+  // const pageParams = await params;
+  const slugParams = await params;
+
+  console.log('slugParams', slugParams);
+  return <h1>상세 조회 - {slugParams.id}번 게시물</h1>;
 }

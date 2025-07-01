@@ -2,7 +2,7 @@ export default async function slugPage({ params }: { params: { id: string; slug:
   const slugParams = await params;
   console.log(`slugParams`, slugParams);
 
-  switch (slugParams.slug[0]) {
+  switch (slugParams.slug?.[0]) {
     case 'likes':
     // 좋아요 목록 출력
     case 'favorites':
@@ -11,9 +11,9 @@ export default async function slugPage({ params }: { params: { id: string; slug:
   return (
     <>
       <h1>
-        {slugParams.id}번 게시물의 {slugParams.slug[0] === 'likes' ? '좋아요 목록' : slugParams.slug[0] === 'favorites' ? '즐겨찾기 목록' : '잘못된 페이지 입니다'}
+        {slugParams.id}번 게시물의 {slugParams.slug?.[0] === 'likes' ? '좋아요 목록' : slugParams.slug?.[0] === 'favorites' ? '즐겨찾기 목록' : '잘못된 페이지 입니다'}
       </h1>
-      {slugParams.slug[1] && <h2>{slugParams.slug[1]} 상세 정보 출력</h2>}
+      {slugParams.slug?.[1] && <h2>{slugParams.slug?.[1]} 상세 정보 출력</h2>}
     </>
   );
 }
