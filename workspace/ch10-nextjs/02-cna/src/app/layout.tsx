@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang='ko'>
-      <body className='flex flex-col h-screen' suppressHydrationWarning>
+      <body className='flex flex-col h-screen'>
         <header className='bg-blue-500 text-white p-4'>
           <nav>
             <ul className='flex space-x-4'>
