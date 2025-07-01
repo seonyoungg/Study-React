@@ -6,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootPage() {
-  return <h1>Home</h1>;
+  return <h1 className='p-6'>Home</h1>;
 }

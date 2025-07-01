@@ -23,3 +23,5 @@ export default async function InfoPage({ params }: { params: { id: string } }) {
   console.log('slugParams', slugParams);
   return <h1>상세 조회 - {slugParams.id}번 게시물</h1>;
 }
+
+// _자체가 이 파일을 [[...slug]] 보여주기 위해 비활성화 한거임

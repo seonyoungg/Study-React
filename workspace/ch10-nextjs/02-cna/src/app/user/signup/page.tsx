@@ -6,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function SignupPage() {
-  return <h1>회원 가입</h1>;
+  return <h1 className='p-6'>회원 가입</h1>;
 }

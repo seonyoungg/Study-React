@@ -5,5 +5,5 @@ export const metadata: Metadata = {
   description: '로그인 페이지입니다.',
 };
 export default function LoginPage() {
-  return <h1>로그인</h1>;
+  return <h1 className='p-6'>로그인</h1>;
 }
