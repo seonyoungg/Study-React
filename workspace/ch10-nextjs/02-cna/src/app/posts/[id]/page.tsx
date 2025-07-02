@@ -31,12 +31,28 @@ export function generateStaticParams() {
 // nextjs15부터는 params가 비동기 방식으로 넘어오기때문에 params를 사용할때는 async await을 붙여줘야한다.
 export default async function InfoPage({ params }: { params: Promise<{ id: string }> }) {
   const pageParams = await params;
+
+  const res = await fetch(`http://localhost:3000/api/posts/${pageParams.id}`);
+  const data = await res.json();
   // const slugParams = await params;
 
-  await new Promise((resolve) => {
-    setTimeout(resolve, 1000 * 2);
-  });
-
   console.log('pageParams', pageParams);
-  return <h1>상세 조회 - {pageParams.id}번 게시물</h1>;
+
+  return (
+    <>
+      <div className='max-w-2xl mx-auto mt-4 p-6 bg-white rounded-xl shadow-md'>
+        <h1 className='text-2xl font-bold text-gray-900  mb-4'>
+          상세 조회 - <span className='text-blue-600 dark:text-blue-400'>{pageParams.id}</span>번 게시물
+        </h1>
+        <div className='space-y-2'>
+          <p className='text-lg text-gray-700 '>
+            <span className='font-semibold'>제목:</span> {data.item?.title}
+          </p>
+          <p className='text-lg text-gray-700 break-keep'>
+            <span className='font-semibold'>내용:</span> {data.item?.content}
+          </p>
+        </div>
+      </div>
+    </>
+  );
 }
