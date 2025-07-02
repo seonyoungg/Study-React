@@ -5,7 +5,11 @@ export const metadata: Metadata = {
   title: '게시물 목록 조회',
   description: '게시물 목록 조회 페이지입니다.',
 };
-export default function ListPage() {
+export default async function ListPage() {
+  await new Promise((resolve) => {
+    setTimeout(resolve, 1000 * 2);
+  });
+
   const dummyLists = [];
   for (let i = 0; i <= 1000; i++) {
     dummyLists.push({

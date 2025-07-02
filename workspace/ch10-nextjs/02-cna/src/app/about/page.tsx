@@ -6,5 +6,8 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  if (Math.random() > 0.5) {
+    throw new Error('About 페이지에서 강제 에러 발생');
+  }
   return <h1 className='p-6'>About</h1>;
 }
