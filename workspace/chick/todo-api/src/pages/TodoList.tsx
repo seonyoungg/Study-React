@@ -1,17 +1,16 @@
-import { ClipLoader } from 'react-spinners';
-import type { TodoItem } from './TodoItem';
+import type { TodoItemType } from './TodoItem';
 import TodoItem from './TodoItem';
-
 interface TodoListPropType {
-  itemList: TodoItem[];
+  itemList: TodoItemType[];
+  fetchList: () => void;
 }
 
-function TodoList({ itemList }: TodoListPropType) {
+function TodoList({ itemList, fetchList }: TodoListPropType) {
   const liList = itemList.map((item) => {
     return <TodoItem key={item._id} item={item} fetchList={fetchList} />;
   });
 
-  return <>{loading ? <ClipLoader color='#2894ff' loading={loading} size={150} aria-label='Loading Spinner' data-testid='loader' /> : <ul className='todolist'>{liList}</ul>}</>;
+  return <ul className='todolist'>{liList}</ul>;
 }
 
 export default TodoList;

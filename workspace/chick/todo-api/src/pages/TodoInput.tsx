@@ -5,17 +5,16 @@ interface TodoInputPropType {
   fetchList: () => void;
 }
 
-function TodoInput() {
+function TodoInput({ fetchList }: TodoInputPropType) {
   console.log('### TodoInput 호출됨.');
 
   // 제어 컴포넌트 1. state 정의
   const [title, setTitle] = useState('');
 
   const inputRef = useRef<HTMLInputElement>(null);
-
   const axiosInstance = useAxiosInstance();
 
-  // 추가 버튼 클릭 이벤트 처리
+  // 추가 버튼 클릭 시 이벤트 처리
   const handleAdd = async () => {
     console.log(`${title} 추가`);
 
@@ -26,6 +25,7 @@ function TodoInput() {
 
     setTitle('');
     inputRef.current?.focus();
+    fetchList();
   };
 
   // 엔터 이벤트 처리

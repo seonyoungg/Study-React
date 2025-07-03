@@ -1,13 +1,13 @@
 import useAxiosInstance from '../hooks/useAxiosInstance';
 
-export interface TodoItem {
+export interface TodoItemType {
   _id: number;
   title: string;
   done: boolean;
 }
 
 interface TodoItemProps {
-  item: TodoItem;
+  item: TodoItemType;
   fetchList: () => void;
 }
 
