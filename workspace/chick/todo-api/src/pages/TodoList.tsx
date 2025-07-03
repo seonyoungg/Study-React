@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useAxiosInstance from '../hooks/useAxiosInstance';
 import TodoItem, { type TodoItem as TodoItemType } from './TodoItem';
 
@@ -8,9 +8,9 @@ interface TodoListPropType {
   toggleDone: (_id: number) => void;
 }
 
-function TodoList({ itemList, deleteItem, toggleDone }: TodoListPropType) {
+function TodoList({ deleteItem, toggleDone }: TodoListPropType) {
   const axiosInstance = useAxiosInstance();
-  // const [itemList, setItemList] = useState();
+  const [itemList, setItemList] = useState<TodoItemType[]>([]);
 
   // 서버로부터 목록 수신
   // const fetchList = () => {
@@ -29,14 +29,19 @@ function TodoList({ itemList, deleteItem, toggleDone }: TodoListPropType) {
   const fetchList = async () => {
     try {
       const res = await axiosInstance.get('/todolist'); // fulfilled 상태
-      // console.log('서버의 응답', res);
+      // console.log('서버의 응답', res.data);
       console.log('서버의 응답', res.data.items);
+      setItemList(res.data.items);
     } catch (err) {
       console.error(err); // rejected 상태
     }
   };
 
-  fetchList();
+  // 최초에만 서버에서만 받아올 수 있도록!
+  useEffect(() => {
+    fetchList();
+  }, []);
+
   const liList = itemList.map((item) => {
     return <TodoItem key={item._id} item={item} deleteItem={deleteItem} toggleDone={toggleDone} />;
   });
