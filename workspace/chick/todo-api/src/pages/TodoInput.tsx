@@ -35,11 +35,12 @@ function TodoInput({ fetchList }: TodoInputPropType) {
   };
 
   return (
-    <div className='todoinput'>
-      {/* 제어 컴포넌트 2. value를 state로 지정 */}
-      {/* 제어 컴포넌트 3. onChange 이벤트에서 setState 호출 */}
-      <input ref={inputRef} type='text' value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={handleAddKeydown} autoFocus />
-      <button type='button' onClick={handleAdd}>
+    <div className='todoinput flex items-center gap-2'>
+      {/* 입력창 */}
+      <input ref={inputRef} type='text' value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={handleAddKeydown} autoFocus placeholder='할 일을 입력하세요' className='flex-1 px-4 py-1.5 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500' />
+
+      {/* 추가 버튼 */}
+      <button type='button' onClick={handleAdd} className='px-4 py-2 bg-blue-500 text-white rounded-xl shadow hover:bg-blue-600 transition'>
         추가
       </button>
     </div>
