@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 //동적인 메타 데이터
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
@@ -28,6 +29,20 @@ export function generateStaticParams() {
   return posts;
 }
 
+// ✨별도의 Content 컴포넌트🐛
+async function Content({ params }: { params: Promise<{ id: string }> }) {
+  const pageParams = await params;
+
+  const res = await fetch(`http://localhost:3000/api/posts/${pageParams.id}?delay=5000`);
+  const data = await res.json();
+
+  return (
+    <p className='text-lg text-gray-700 break-keep'>
+      <span className='font-semibold'>내용:</span> {data.item?.content}
+    </p>
+  );
+}
+
 // nextjs15부터는 params가 비동기 방식으로 넘어오기때문에 params를 사용할때는 async await을 붙여줘야한다.
 export default async function InfoPage({ params }: { params: Promise<{ id: string }> }) {
   const pageParams = await params;
@@ -48,9 +63,9 @@ export default async function InfoPage({ params }: { params: Promise<{ id: strin
           <p className='text-lg text-gray-700 '>
             <span className='font-semibold'>제목:</span> {data.item?.title}
           </p>
-          <p className='text-lg text-gray-700 break-keep'>
-            <span className='font-semibold'>내용:</span> {data.item?.content}
-          </p>
+          <Suspense fallback={<p>제발 로딩중...</p>}>
+            <Content params={params} />
+          </Suspense>
         </div>
       </div>
     </>
