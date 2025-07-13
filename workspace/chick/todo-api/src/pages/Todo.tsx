@@ -26,7 +26,6 @@ function Todo() {
 
   // api 연결
   const axiosInstance = useAxiosInstance();
-
   useEffect(() => {
     fetchList();
   }, []);
