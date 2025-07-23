@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// TODO 알아보기
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   console.log('GET 라우트 핸들러', id);
